@@ -1,0 +1,29 @@
+Nifi on Ngnix 
+Install nifi 
+change nifi properties 
+HTTP 8080 
+# Site to Site properties
+nifi.remote.input.host=
+nifi.remote.input.secure=false
+
+And HTTP port 8080 
+install nginix and make new file 
+andput content
+
+server {
+    listen 80;
+    server_name 52.86.251.192;
+
+    location / {
+        proxy_pass http://52.86.251.192:8080;  # NiFi is running on port 8080
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_buffering off;
+        proxy_request_buffering off;
+		
+		
+		Restart nifi and nginx 
+		
+		Thats it
